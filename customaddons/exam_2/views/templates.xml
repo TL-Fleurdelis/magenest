@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <template id="cart_warranty" inherit_id="website_sale.total">-->
+
+<!--            <xpath expr="//div[@id='cart_total']//table/tr[3]" position="before">-->
+<!--                <td class="text-right border-0">Warranty:</td>-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//div[@id='cart_total']//table/tr[3]" position="before">-->
+<!--                <td class="text-xl-right border-0">-->
+<!--                    <span t-field="line.product_warranty"/>-->
+<!--                </td>-->
+<!--            </xpath>-->
+
+<!--        </template>-->
+        <template id="product_warranty" inherit_id="website_sale.product">
+            <xpath expr="//div[@id='product_details']" position="after">
+                <div>Warranty: </div>
+                <span t-field="product.product_warranty"></span>
+            </xpath>
+        </template>
+<!--        <template id="cart_product_warranty" inherit_id="website_sale.cart">-->
+<!--            <xpath expr="//td[@class='td-product_name']" position="replace">-->
+<!--                  <span t-field="website_sale.product_warranty"></span>-->
+<!--            </xpath>-->
+<!--        </template>-->
+    </data>
+</odoo>
