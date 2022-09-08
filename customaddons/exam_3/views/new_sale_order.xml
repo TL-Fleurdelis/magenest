@@ -15,9 +15,9 @@
                         attrs="{'invisible':[('state','in',('sale','cancel'))]}"/>
             </button>
 
-            <field name="payment_term_id" position="after">
-                <field name="plan_sale_order"/>
-            </field>
+<!--            <field name="payment_term_id" position="after">-->
+<!--                <field name="plan_sale_order"/>-->
+<!--            </field>-->
 
         </field>
     </record>

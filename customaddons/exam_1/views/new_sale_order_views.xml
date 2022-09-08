@@ -29,7 +29,7 @@
 <!--                <field name="customer_discount_code"/>-->
 <!--            </xpath>-->
             <xpath expr="//tree" position="inside">
-                <field name="customer_discount_code" optional="show"/>
+                <field name="customer_discount_code" optional="show" decoration-info="customer_discount_code != ''" widget="badge"/>
             </xpath>
         </field>
     </record>
@@ -46,7 +46,7 @@
 <!--                <field name="customer_discount_code" optional="show"/>-->
 <!--            </xpath>-->
             <xpath expr="//field[@name='company_id']" position="after">
-                <field name="customer_discount_code"/>
+                <field name="customer_discount_code" decoration-info="customer_discount_code != ''" widget="badge"/>
             </xpath>
         </field>
     </record>

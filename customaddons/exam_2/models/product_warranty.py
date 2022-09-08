@@ -6,13 +6,13 @@ class ProductWarranty (models.Model):
     # Inherit from  product.template
     _inherit = 'product.template'
 
-    date_from = fields.Date(string='Date from', default=fields.Date.today)
+    date_from = fields.Date(string='Date from')
     date_to = fields.Date(string='Date to')
 
     product_warranty = fields.Text(string='Product Warranty')
     sale_order_discount_estimated = fields.Float()
     calculated_discount_total = fields.Float()
-    days_left = fields.Integer(string='Remaining days of warranty', compute='_compute_date', store=True)
+    days_left = fields.Integer(string='Remaining days of warranty', compute='_compute_date')
     status_warranty = fields.Text(string='Status Warranty', compute='_compute_warranty_left')
     product_discount = fields.Float(string='Product discount (%)')
 
@@ -94,7 +94,7 @@ class ProductWarranty (models.Model):
                 months = (years - years_to_int) * 12
                 months_to_int = int(months)
 
-                days = (months - months_to_int) * (365.242 / 12)
+                days = round((months - months_to_int) * (365.242 / 12), 0)
                 days_to_int = int(days)
 
                 r.status_warranty = '{0:d} years ,' '{1:d} months ,' '{2:d}  days '\

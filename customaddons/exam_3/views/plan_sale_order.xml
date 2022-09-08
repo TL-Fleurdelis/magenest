@@ -29,8 +29,9 @@
                         <field name="name" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>
                         <field name="quotation" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>
                         <field name="content" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>
-                        <field name="create_uid" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}" readonly="1" groups="exam_3.plan_sale_order_group_reviewer"/>
-                        <field name="can_confirm" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>
+                        <field name="create_uid" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}" readonly="1"
+                               groups="exam_3.plan_sale_order_group_reviewer"/>
+<!--                        <field name="can_confirm" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>-->
                     </group>
 
                     <notebook>
@@ -67,11 +68,20 @@
         <field name="name">view.plan.sale.order.tree</field>
         <field name="model">plan.sale.order</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-success="state == 'approve'"
+                  decoration-danger="state == 'refuse'"
+                  decoration-primary="state == 'send'"
+                  decoration-info="state == 'new'">
                 <field name="name"/>
-                <field name="state"/>
                 <field name="quotation"/>
                 <field name="create_uid"/>
+                <field name="state" widget="badge"
+                       decoration-primary="state == 'send'"
+                       decoration-success="state == 'approve'"
+                       decoration-danger="state =='refuse'"
+                       decoration-info="state == 'new'"/>
+
+
             </tree>
         </field>
     </record>

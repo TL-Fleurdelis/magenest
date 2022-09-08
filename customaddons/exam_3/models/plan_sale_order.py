@@ -18,9 +18,7 @@ class PlanSaleOrder(models.Model):
         ('refuse', 'Refuse'),
     ], string='State of quotation', readonly=True, tracking=True, default='unknown')
 
-    order_line = fields.One2many('plan.sale.order.list', 'order_id', string='Order Lines',
-                                 states={'cancel': [('readonly', True)], 'done': [('readonly', True)]},
-                                 copy=True, tracking=True)
+    order_line = fields.One2many('plan.sale.order.list', 'order_id', string='Order Lines', tracking=True)
     can_confirm = fields.Selection([('yes', 'Yes'), ('no', 'No')], default='no', tracking=True)
 
     # Button set up new plan
