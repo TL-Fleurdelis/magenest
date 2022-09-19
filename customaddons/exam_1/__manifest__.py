@@ -17,7 +17,7 @@ Bán hàng nâng cao
     'version': '0.1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale_management', 'l10n_de','website_sale'],
+    'depends': ['base', 'sale_management', 'l10n_de', 'website_sale', 'event_booth_sale'],
     # always loaded
     'data': [
         'security/new_customer_security.xml',
@@ -28,5 +28,8 @@ Bán hàng nâng cao
         'wizard/customer_wizard_views.xml',
         'views/templates.xml',
     ],
-
+    'assets': {
+        'web.assets_backend': [
+            'exam_1/static/src/css/custom_style.css',
+        ]},
 }

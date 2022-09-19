@@ -2,20 +2,19 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 
-class ProductWarranty (models.Model):
+class ProductWarranty(models.Model):
     # Inherit from  product.template
     _inherit = 'product.template'
 
     date_from = fields.Date(string='Date from')
     date_to = fields.Date(string='Date to')
 
-    product_warranty = fields.Text(string='Product Warranty')
-    sale_order_discount_estimated = fields.Float()
-    calculated_discount_total = fields.Float()
+    product_warranty = fields.Text(string='Product Warranty', readonly=True, compute="_compute_code_warranty")
     days_left = fields.Integer(string='Remaining days of warranty', compute='_compute_date')
     status_warranty = fields.Text(string='Status Warranty', compute='_compute_warranty_left')
-    product_discount = fields.Float(string='Product discount (%)')
-
+    product_discount = fields.Float(string='Product discount (%)', compute="_compute_product_warranty")
+    active_product_discount = fields.Boolean(string="Active product discounts ", default=False, readonly=True)
+    reduce_value = fields.Float(string="Value discount", readonly=True)
     # Sync Magento
     sync_magento = fields.Boolean()
 
@@ -26,9 +25,29 @@ class ProductWarranty (models.Model):
     def unselect_sync_magento(self):
         self.sync_magento = False
 
+    def activate_product_discount_code(self):
+        if self.product_discount > 0 and self.active_product_discount is False:
+            self.reduce_value = self.list_price * self.product_discount / 100
+            self.list_price -= self.reduce_value
+            self.active_product_discount = True
+        elif self.product_discount > 0 and self.active_product_discount is True:
+            raise ValidationError("This product already has a discount code activated.")
+        else:
+            raise ValidationError("This product doesn't have any discount. Please check it out !")
+
+    def deactivate_product_discount_code(self):
+        if self.product_discount > 0 and self.active_product_discount is True:
+            self.list_price += self.reduce_value
+            # self.reduce_value = 0
+            self.active_product_discount = False
+        elif self.product_discount > 0 and self.active_product_discount is False:
+            raise ValidationError("This product has deactivated the discount code.")
+        else:
+            raise ValidationError("This product doesn't have any discount. Please check it out !")
+
     '''
     # Filtered để lọc các bản ghi
-    
+
     @api.constrains('date_from','date_to')
     def check_available(self):
          if self.filtered(lambda r: r.date_from > r.date_to):
@@ -41,6 +60,12 @@ class ProductWarranty (models.Model):
             if r.date_from and r.date_to:
                 if r.date_from > r.date_to:
                     raise ValidationError('[Date from] field must be sooner than [Date to] field')
+            elif r.date_from != "" and r.date_to:
+                raise ValidationError("Where is [Date from] ???")
+            elif r.date_from and r.date_to != "":
+                raise ValidationError('Where is [Date to] ???')
+            else:
+                pass
 
     @api.depends('date_from', 'date_to')
     def _compute_date(self):
@@ -52,14 +77,25 @@ class ProductWarranty (models.Model):
             else:
                 r.days_left = False
 
-    @api.onchange('product_warranty', 'days_left')
-    def _onchange_product_discount(self):
-        if self.product_warranty != '':
-            self.product_discount = 0
-            if self.days_left < 0:
-                self.product_discount = 10
-        else:
-            self.product_discount = 10
+    # @api.onchange('product_warranty')
+    # def _onchange_product_discount(self):
+    #     if self.product_warranty != '':
+    #         if self.days_left < 0:
+    #             self.product_discount = 10
+    #         else:
+    #             self.product_discount = 0
+    #     else:
+    #         self.product_discount = 10
+    @api.depends('product_warranty')
+    def _compute_product_warranty(self):
+        for r in self:
+            if r.product_warranty != '':
+                if r.days_left < 0:
+                    r.product_discount = 10
+                else:
+                    r.product_discount = 0
+            else:
+                r.product_discount = 10
 
     # @api.depends('days_left')
     # def _compute_check_status(self):
@@ -88,7 +124,7 @@ class ProductWarranty (models.Model):
                 deadline_date = fields.Datetime.to_datetime(r.date_to).date()
                 left_days = deadline_date - today
 
-                years = ((left_days.total_seconds()) / (365.242*24*3600))
+                years = ((left_days.total_seconds()) / (365.242 * 24 * 3600))
                 years_to_int = int(years)
 
                 months = (years - years_to_int) * 12
@@ -97,7 +133,7 @@ class ProductWarranty (models.Model):
                 days = round((months - months_to_int) * (365.242 / 12), 0)
                 days_to_int = int(days)
 
-                r.status_warranty = '{0:d} years ,' '{1:d} months ,' '{2:d}  days '\
+                r.status_warranty = '{0:d} years ,' '{1:d} months ,' '{2:d}  days ' \
                     .format(years_to_int, months_to_int, days_to_int)
                 if years_to_int < 0 or months_to_int < 0 or days_to_int < 0:
                     r.status_warranty = 'Out of Warranty'
@@ -106,26 +142,26 @@ class ProductWarranty (models.Model):
             else:
                 r.status_warranty = 'No warranty'
 
-    @api.onchange('date_from', 'date_to')
-    def _onchange_code_warranty(self):
-        if self.date_from and self.date_to:
-            str_from, str_to = str(self.date_from), str(self.date_to)
-
-            # str_day_from, str_month_from, str_year_from = \
-            #     str(self.date_from.day), str(self.date_from.month), str(self.date_from.year)[2:]
-            #
-            # str_day_to, str_month_to, str_year_to =\
-            #     str(self.date_to.day), str(self.date_to.month), str(self.date_to.year)[2:]
-
-            # code = 'PWD'+'/'+ str_from +'/'+ str_to
-
-            label_day_from = str_from[8:10] + str_from[5:7] + str_from[2:4]
-            label_day_to = str_to[8:10] + str_to[5:7] + str_to[2:4]
-            code = 'PWD' + '/' + label_day_from + '/' + label_day_to
-
-            self.product_warranty = code
-        else:
-            self.product_warranty = ''
+    # @api.onchange('date_from', 'date_to')
+    # def _onchange_code_warranty(self):
+    #     if self.date_from and self.date_to:
+    #         str_from, str_to = str(self.date_from), str(self.date_to)
+    #
+    #         # str_day_from, str_month_from, str_year_from = \
+    #         #     str(self.date_from.day), str(self.date_from.month), str(self.date_from.year)[2:]
+    #         #
+    #         # str_day_to, str_month_to, str_year_to =\
+    #         #     str(self.date_to.day), str(self.date_to.month), str(self.date_to.year)[2:]
+    #
+    #         # code = 'PWD'+'/'+ str_from +'/'+ str_to
+    #
+    #         label_day_from = str_from[8:10] + str_from[5:7] + str_from[2:4]
+    #         label_day_to = str_to[8:10] + str_to[5:7] + str_to[2:4]
+    #         code = 'PWD' + '/' + label_day_from + '/' + label_day_to
+    #
+    #         self.product_warranty = code
+    #     else:
+    #         self.product_warranty = ''
 
     @api.depends('date_from', 'date_to')
     def _compute_code_warranty(self):
@@ -144,7 +180,7 @@ class ProductWarranty (models.Model):
                 label_day_from = str_from[8:10] + str_from[5:7] + str_from[2:4]
                 label_day_to = str_to[8:10] + str_to[5:7] + str_to[2:4]
 
-                code = 'PWD'+'/' + label_day_from + '/ ' + label_day_to
+                code = 'PWD' + '/' + label_day_from + '/' + label_day_to
                 # code2 = 'PWD'+'/' + str_from + '/' + str_to
 
                 r.product_warranty = code

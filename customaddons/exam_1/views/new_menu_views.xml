@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-<!--    <record model="ir.actions.act_window" id="exam_1.action_new">-->
-<!--            <field name="name">List of Customers have Invalid code</field>-->
-<!--            <field name="res_model">res.partner</field>-->
-<!--            <field name="view_mode">tree,form</field>-->
-<!--    </record>-->
-
     <record model="ir.actions.act_window" id="new_customer">
         <field name="name">List of Customers</field>
         <field name="res_model">res.partner</field>

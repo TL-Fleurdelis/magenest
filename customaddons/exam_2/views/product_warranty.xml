@@ -27,13 +27,24 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
+            <button name="action_open_label_layout" position="after">
+                <button type="object" name="activate_product_discount_code" class="btn-success"
+                        string="Active product discount code"/>
+                <button type="object" name="deactivate_product_discount_code" class="btn-danger"
+                        string="Deactivate product discount code"/>
+            </button>
             <field name="company_id" position="after">
                 <field name="date_from" groups='exam_1.advanced_sale'/>
                 <field name="date_to" groups='exam_1.advanced_sale'/>
-                <field name="product_warranty" groups='exam_1.advanced_sale'/>
+                <field name="product_warranty" class="product_warranty" groups='exam_1.advanced_sale'/>
                 <field name="days_left"/>
-                <field name="status_warranty"/>
+                <field name="status_warranty"
+                       decoration-success="days_left > 0"
+                       decoration-danger="status_warranty == 'Out of Warranty'"
+                       decoration-info="status_warranty == 'No warranty'"/>
                 <field name="product_discount"/>
+                <field name="active_product_discount"/>
+                <field name="reduce_value" class="reduce_value" attrs="{'invisible': [('active_product_discount', '=',False)]}"/>
             </field>
             <field name="purchase_ok" position="before">
                 <field name="sync_magento"/>
@@ -57,11 +68,14 @@
         <field name="inherit_id" ref="product.product_template_tree_view"/>
         <field name="arch" type="xml">
             <field name="list_price" position="after">
-                <field name="date_from"/>
-                <field name="date_to"/>
+                <field name="date_from" decoration-it="product_warranty != ''"/>
+                <field name="date_to" decoration-it="product_warranty != ''"/>
                 <field name="product_warranty" decoration-bf="product_warranty != ''"/>
                 <field name="status_warranty"
-                        decoration-warning="status_warranty =='Out of Warranty'"/>
+                       widget="badge"
+                       decoration-success="days_left > 0"
+                       decoration-danger="status_warranty == 'Out of Warranty'"
+                       decoration-info="status_warranty == 'No warranty'"/>
                 <field name="days_left"/>
                 <field name="product_discount"/>
             </field>

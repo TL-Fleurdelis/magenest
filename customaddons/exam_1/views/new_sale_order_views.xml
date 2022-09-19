@@ -10,8 +10,8 @@
 
         <field name="arch" type="xml">
             <field name="payment_term_id" position="after">
-                <field name="customer_discount_code"/>
-                <field name="code_value"/>
+                <field name="customer_discount_code"  class="customer_discount_code"/>
+                <field name="code_value" class="code_value"/>
             </field>
         </field>
 

@@ -12,4 +12,5 @@
 
     <!--Menu-->
     <menuitem id="menu_plan_sale_order" name="Plan sale order" parent="sale.sale_menu_root" action="plan_sale_order_action"/>
+
 </odoo>

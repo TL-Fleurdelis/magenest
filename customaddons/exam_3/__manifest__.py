@@ -27,6 +27,10 @@
         'views/new_menu_views.xml',
         'views/new_sale_order.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'exam_3/static/src/css/custom_style.css',
+        ]},
     # only loaded in demonstration mode
     # 'demo': [
     #     'demo/demo.xml',

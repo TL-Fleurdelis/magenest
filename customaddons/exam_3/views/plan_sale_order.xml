@@ -26,11 +26,11 @@
 
                 <sheet>
                     <group string="Plan sale order">
-                        <field name="name" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>
-                        <field name="quotation" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>
-                        <field name="content" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>
+                        <field class="name_plan_sale_order" name="name" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>
+                        <field class="quotation" name="quotation" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>
+                        <field class="content_quotation" name="content" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>
                         <field name="create_uid" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}" readonly="1"
-                               groups="exam_3.plan_sale_order_group_reviewer"/>
+                               groups="exam_3.plan_sale_order_group_reviewer" widget="many2one_avatar_user"/>
 <!--                        <field name="can_confirm" attrs="{'readonly': [('state', 'in', ('send','approve','refuse'))]}"/>-->
                     </group>
 
@@ -74,14 +74,12 @@
                   decoration-info="state == 'new'">
                 <field name="name"/>
                 <field name="quotation"/>
-                <field name="create_uid"/>
+                <field name="create_uid" widget="many2one_avatar_user"/>
                 <field name="state" widget="badge"
                        decoration-primary="state == 'send'"
                        decoration-success="state == 'approve'"
                        decoration-danger="state =='refuse'"
                        decoration-info="state == 'new'"/>
-
-
             </tree>
         </field>
     </record>
@@ -92,6 +90,11 @@
         <field name="model">plan.sale.order</field>
         <field name="arch" type="xml">
             <search string="Search create UID">
+                <filter name="state_unknown" string="All plan in Unknown state" domain="[('state','=','unknown')]"/>
+                <filter name="state_new" string="All plans in New state" domain="[('state','=','new')]"/>
+                <filter name="state_send" string="All plans in Send state" domain="[('state','=','send')]"/>
+                <filter name="state_approve" string="All plans in Approve state" domain="[('state','=','approve')]"/>
+                <filter name="state_refuse" string="All plans in Refuse state" domain="[('state','=','refuse')]"/>
                 <group string="Group by Create UID">
                     <filter string="Group by Create UID" name="group_by_create_uid"
                         context="{'group_by':'create_uid'}" />

@@ -12,9 +12,9 @@
 
             <!--Inherit from form view in res.partner-->
             <xpath expr="//field[@name='category_id']" position="after">
-                <field name="customer_discount_code" groups='exam_1.advanced_sale'/>
+                <field name="customer_discount_code" class="customer_discount_code" groups='exam_1.advanced_sale'/>
                 <field name="active_discount_code"/>
-                <field name="code_value"/>
+                <field name="code_value" class="code_value"/>
             </xpath>
 
             <!--Check Discount Code in view form-->

@@ -7,7 +7,7 @@ class PlanSaleOrder(models.Model):
     _inherit = ['mail.thread']
 
     name = fields.Text(required=True, tracking=True)
-    quotation = fields.Many2one('sale.order', store=True)
+    quotation = fields.Many2one('sale.order', store=True, required=True)
     content = fields.Text(string='Content of the quotations', required=True, tracking=True)
 
     state = fields.Selection([

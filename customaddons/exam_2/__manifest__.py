@@ -33,5 +33,8 @@
         'wizard/warranty_wizard_views.xml',
         'views/templates.xml',
     ],
-
+    'assets': {
+        'web.assets_backend': [
+            'exam_2/static/src/css/custom_style.css',
+        ]},
 }
