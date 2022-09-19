@@ -17,7 +17,6 @@
     'author': "TL-Fleurdelis",
     'website': "https://github.com/TL-Fleurdelis",
 
-
     # for the full list
     'category': 'Uncategorized',
     'version': '0.1.0',

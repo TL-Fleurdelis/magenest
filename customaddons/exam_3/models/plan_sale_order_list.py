@@ -2,7 +2,6 @@ from odoo import models, fields
 
 
 class PlanSaleOrderList(models.Model):
-
     _name = 'plan.sale.order.list'
     _description = 'Plan Sale Order List'
 

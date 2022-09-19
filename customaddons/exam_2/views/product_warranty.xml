@@ -44,20 +44,21 @@
                        decoration-info="status_warranty == 'No warranty'"/>
                 <field name="product_discount"/>
                 <field name="active_product_discount"/>
-                <field name="reduce_value" class="reduce_value" attrs="{'invisible': [('active_product_discount', '=',False)]}"/>
+                <field name="reduce_value" class="reduce_value"
+                       attrs="{'invisible': [('active_product_discount', '=',False)]}"/>
             </field>
             <field name="purchase_ok" position="before">
                 <field name="sync_magento"/>
                 <label for="sync_magento"/>
             </field>
-<!--            <xpath expr="//field[@name='company_id']" position="after">-->
-<!--                <field name="date_from" groups='exam_1.advanced_sales'/>-->
-<!--                <field name="date_to" groups='exam_1.advanced_sales'/>-->
-<!--                <field name="product_warranty" groups='exam_1.advanced_sales'/>-->
-<!--                <field name="days_left"/>-->
-<!--                <field name="status_warranty"/>-->
-<!--                <field name="product_discount"/>-->
-<!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='company_id']" position="after">-->
+            <!--                <field name="date_from" groups='exam_1.advanced_sales'/>-->
+            <!--                <field name="date_to" groups='exam_1.advanced_sales'/>-->
+            <!--                <field name="product_warranty" groups='exam_1.advanced_sales'/>-->
+            <!--                <field name="days_left"/>-->
+            <!--                <field name="status_warranty"/>-->
+            <!--                <field name="product_discount"/>-->
+            <!--            </xpath>-->
         </field>
     </record>
 
@@ -82,7 +83,7 @@
         </field>
     </record>
 
-<!--    Inherit Search View and create filter all product has warranty valid until today-->
+    <!--    Inherit Search View and create filter all product has warranty valid until today-->
     <record id="view_sale_order_inherit_search" model="ir.ui.view">
         <field name="name">view.sale.order.inherit.search</field>
         <field name="model">product.template</field>
@@ -90,32 +91,32 @@
         <field name="arch" type="xml">
             <xpath expr="//search" position="inside">
                 <group string="Custom filter">
-<!--                    <filter string="All product has warranty valid until today" name="product_warranty_valid_today_filter"-->
-<!--                        domain="[('days_left','>',0)]"/>-->
+                    <!--                    <filter string="All product has warranty valid until today" name="product_warranty_valid_today_filter"-->
+                    <!--                        domain="[('days_left','>',0)]"/>-->
                     <filter name="warranty" string="Warranty Valid Until Today"
-                        domain="[('date_to','&gt;',context_today().strftime('%Y-%m-%d'))]"/>
-<!--                    <filter string="All products are out of warranty" name="product_warranty_out_filter"-->
-<!--                        domain="[('days_left','<',0)]"/>-->
+                            domain="[('date_to','&gt;',context_today().strftime('%Y-%m-%d'))]"/>
+                    <!--                    <filter string="All products are out of warranty" name="product_warranty_out_filter"-->
+                    <!--                        domain="[('days_left','<',0)]"/>-->
                 </group>
             </xpath>
 
-<!--            <field name="//filter[@name='']" position="inside">-->
-<!--                <filter string="All product has warranty valid" name="product_warranty_valid_filter"-->
-<!--                        domain="[('days_left','>','0')]"/>-->
-<!--            </field>-->
+            <!--            <field name="//filter[@name='']" position="inside">-->
+            <!--                <filter string="All product has warranty valid" name="product_warranty_valid_filter"-->
+            <!--                        domain="[('days_left','>','0')]"/>-->
+            <!--            </field>-->
         </field>
     </record>
 
-<!--        Search product warranty-->
-<!--    <record id="view_new_product_search" model="ir.ui.view">-->
-<!--        <field name="name">Product search Warranty</field>-->
-<!--        <field name="model">product.template</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search>-->
-<!--&lt;!&ndash;                <field name="display_name"/>&ndash;&gt;-->
-<!--                <filter string="All product has warranty valid until today" name="product_warranty_valid_filter"-->
-<!--                        domain="[('days_left','>','0')]"/>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
+    <!--        Search product warranty-->
+    <!--    <record id="view_new_product_search" model="ir.ui.view">-->
+    <!--        <field name="name">Product search Warranty</field>-->
+    <!--        <field name="model">product.template</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <search>-->
+    <!--&lt;!&ndash;                <field name="display_name"/>&ndash;&gt;-->
+    <!--                <filter string="All product has warranty valid until today" name="product_warranty_valid_filter"-->
+    <!--                        domain="[('days_left','>','0')]"/>-->
+    <!--            </search>-->
+    <!--        </field>-->
+    <!--    </record>-->
 </odoo>

@@ -10,7 +10,7 @@
 
         <field name="arch" type="xml">
             <field name="payment_term_id" position="after">
-                <field name="customer_discount_code"  class="customer_discount_code"/>
+                <field name="customer_discount_code" class="customer_discount_code"/>
                 <field name="code_value" class="code_value"/>
             </field>
         </field>
@@ -25,16 +25,17 @@
         <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
 
         <field name="arch" type="xml">
-<!--            <xpath expr="//field[@name='partner_id']" position="after">-->
-<!--                <field name="customer_discount_code"/>-->
-<!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='partner_id']" position="after">-->
+            <!--                <field name="customer_discount_code"/>-->
+            <!--            </xpath>-->
             <xpath expr="//tree" position="inside">
-                <field name="customer_discount_code" optional="show" decoration-info="customer_discount_code != ''" widget="badge"/>
+                <field name="customer_discount_code" optional="show" decoration-info="customer_discount_code != ''"
+                       widget="badge"/>
             </xpath>
         </field>
     </record>
 
-<!--    New Tree view Sale Order-->
+    <!--    New Tree view Sale Order-->
     <record id="view_new_sale_order_tree" model="ir.ui.view">
 
         <field name="name">view.new.sale.order.tree</field>
@@ -42,9 +43,9 @@
         <field name="inherit_id" ref="sale.view_order_tree"/>
 
         <field name="arch" type="xml">
-<!--            <xpath expr="//tree" position="inside">-->
-<!--                <field name="customer_discount_code" optional="show"/>-->
-<!--            </xpath>-->
+            <!--            <xpath expr="//tree" position="inside">-->
+            <!--                <field name="customer_discount_code" optional="show"/>-->
+            <!--            </xpath>-->
             <xpath expr="//field[@name='company_id']" position="after">
                 <field name="customer_discount_code" decoration-info="customer_discount_code != ''" widget="badge"/>
             </xpath>

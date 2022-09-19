@@ -5,7 +5,7 @@ class NewSaleOderLine(models.Model):
     _inherit = 'sale.order.line'
 
     code_value_line = fields.Float(related='order_id.code_value')
-    
+
     @api.depends('product_uom_qty', 'discount', 'code_value_line', 'tax_id')
     def _compute_amount(self):
         for line in self:

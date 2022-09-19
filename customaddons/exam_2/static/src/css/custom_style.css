@@ -1,9 +1,10 @@
-.product_warranty{
-    color:black;
+.product_warranty {
+    color: black;
     font-weight: bold;
-    font-size:20px;
+    font-size: 20px;
 }
-.reduce_value{
-    color:blue;
+
+.reduce_value {
+    color: blue;
     font-weight: bold;
 }
