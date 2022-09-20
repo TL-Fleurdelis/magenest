@@ -4,6 +4,7 @@ from odoo.exceptions import UserError
 
 class PlanSaleOrder(models.Model):
     _name = 'plan.sale.order'
+    _description = 'Plan Sale Order'
     _inherit = ['mail.thread']
 
     name = fields.Text(required=True, tracking=True)
@@ -71,6 +72,9 @@ class PlanSaleOrder(models.Model):
 
     def unlink(self):
         for r in self:
-            if r.state == 'approve' or r.state == 'send':
+            valid_list = ['approve', 'send']
+            # if r.state == 'approve' or r.state == 'send':
+            #     raise UserError("You cannot delete this plan sale order in Approve state or Send state.")
+            if r.state in valid_list:
                 raise UserError("You cannot delete this plan sale order in Approve state or Send state.")
         return super(PlanSaleOrder, self).unlink()

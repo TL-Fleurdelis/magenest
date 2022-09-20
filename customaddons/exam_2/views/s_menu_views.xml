@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="product_warranty" model="ir.actions.act_window">
+    <record id="menu_product_template_warranty_action" model="ir.actions.act_window">
         <field name="name">List of product warranty valid until today</field>
         <field name="res_model">product.template</field>
         <field name="domain">[('date_to','&gt;',context_today().strftime('%Y-%m-%d'))]</field>
     </record>
     <!--    parent="sale.product_menu_catalog"-->
-    <menuitem id="menu_product_warranty" name="All products have warranty" parent="sale.sale_menu_root"
-              action="product_warranty"/>
+    <menuitem id="menu_product_template_warranty"
+              name="All products have warranty"
+              parent="sale.sale_menu_root"
+              action="menu_product_template_warranty_action"/>
 </odoo>

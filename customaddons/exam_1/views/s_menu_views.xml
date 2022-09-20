@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <record model="ir.actions.act_window" id="new_customer">
+    <record id="menu_sale_order_valid_code_customer_action" model="ir.actions.act_window" >
         <field name="name">List of Customers</field>
         <field name="res_model">res.partner</field>
         <!--        <field name="context">{'search_default_special_customer_valid_filter':0}</field>-->
         <field name="domain">[('active_discount_code','=',True)]</field>
     </record>
 
-    <menuitem id="menu_new_customers" name="Customers who have valid code" parent="sale.sale_menu_root"
-              action="new_customer"/>
+    <menuitem id="menu_sale_order_valid_code_customer" name="Customers who have valid code" parent="sale.sale_menu_root"
+              action="menu_sale_order_valid_code_customer_action"/>
 
 </odoo>

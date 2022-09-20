@@ -1,13 +1,15 @@
-from odoo import models, fields,api
+from odoo import models, fields, api
 
 
-class WarrantyWizard(models.Model):
-    _name = 'warranty.wizard'
-    _description = 'Warranty Wizard'
+class ProductTemplateAddWarrantyWizard(models.Model):
+    _name = 'product.template.add.warranty.wizard'
+    _description = 'Product Template Add Warranty Wizard'
+
     product_id = fields.Many2many('product.template', string='Product')
     wiz_date_from = fields.Date()
     wiz_date_to = fields.Date()
     wiz_product_warranty = fields.Text()
+
     @api.onchange('wiz_date_from', 'wiz_date_to')
     def _onchange_code_warranty(self):
         if self.wiz_date_from and self.wiz_date_to:
@@ -28,6 +30,7 @@ class WarrantyWizard(models.Model):
             self.wiz_product_warranty = code
         else:
             self.wiz_product_warranty = ''
+
     def set_warranty_for_product(self):
         self.product_id.write({
 

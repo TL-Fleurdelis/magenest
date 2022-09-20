@@ -2,9 +2,9 @@
 <odoo>
 
     <!--Show in form-->
-    <record id="view_new_product_form" model="ir.ui.view">
+    <record id="s_res_partner_form_view" model="ir.ui.view">
 
-        <field name="name">view.new.customer.form</field>
+        <field name="name">s.res.partner.form.view</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
 
@@ -44,9 +44,9 @@
     </record>
 
     <!--Show in tree-->
-    <record id="view_new_customer_tree" model="ir.ui.view">
+    <record id="s_res_partner_tree_view" model="ir.ui.view">
 
-        <field name="name">view.new.customer.tree</field>
+        <field name="name">s.res.partner.tree.view</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_tree"/>
 
@@ -60,9 +60,9 @@
     </record>
 
     <!--    Search special customer-->
-    <record id="view_special_customer_search" model="ir.ui.view">
+    <record id="res_partner_special_search_view" model="ir.ui.view">
 
-        <field name="name">view.special.customer.search</field>
+        <field name="name">res.partner.special.search.view</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_res_partner_filter"/>
 

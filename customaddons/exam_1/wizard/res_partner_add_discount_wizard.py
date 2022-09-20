@@ -2,10 +2,10 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 
 
-class CustomerWizard(models.Model):
+class ResPartnerAddDiscountWizard(models.Model):
     
-    _name = 'customer.wizard'
-    _description = 'Customers Wizard'
+    _name = 'res.partner.add.discount.wizard'
+    _description = 'Res Partner Add Discount Wizard'
 
     customer_id = fields.Many2many('res.partner', string='Customers')
     wiz_customer_discount_code = fields.Text(string='Customer discount code')

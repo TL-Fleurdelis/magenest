@@ -2,7 +2,7 @@
 <odoo>
     <record id="warranty_wizard_form" model="ir.ui.view">
         <field name="name">warranty.wizard.form</field>
-        <field name="model">warranty.wizard</field>
+        <field name="model">product.template.add.warranty.wizard</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -28,7 +28,7 @@
    	<record id="action_warranty_wizard" model="ir.actions.act_window">
 		<field name="name">Wizard Warranty</field>
 		<field name="type">ir.actions.act_window</field>
-		<field name="res_model">warranty.wizard</field>
+		<field name="res_model">product.template.add.warranty.wizard</field>
 		<field name="view_mode">form</field>
 		<!-- <field name="view_id" ref="crm_lead_lost_view_form"/> -->
 		<field name="target">new</field>

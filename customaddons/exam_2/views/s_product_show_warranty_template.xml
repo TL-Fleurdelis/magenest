@@ -14,7 +14,7 @@
         <!--            </xpath>-->
 
         <!--        </template>-->
-        <template id="product_warranty" inherit_id="website_sale.product">
+        <template id="s_product_show_warranty_template" inherit_id="website_sale.product">
             <xpath expr="//div[@id='product_details']" position="after">
                 <div>Warranty:</div>
                 <span t-field="product.product_warranty"></span>

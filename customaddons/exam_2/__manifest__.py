@@ -27,10 +27,10 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/product_warranty.xml',
-        'views/new_menu_views.xml',
-        'wizard/warranty_wizard_views.xml',
-        'views/templates.xml',
+        'views/s_product_template_views.xml',
+        'views/s_menu_views.xml',
+        'wizard/product_template_add_warranty_wizard_views.xml',
+        'views/s_product_template_views.xml',
     ],
     'assets': {
         'web.assets_backend': [

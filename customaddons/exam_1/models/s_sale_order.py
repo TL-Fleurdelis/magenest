@@ -1,7 +1,7 @@
 from odoo import models, fields
 
 
-class NewSaleOrder(models.Model):
+class SSaleOrder(models.Model):
     _inherit = 'sale.order'
 
     customer_discount_code = fields.Text(string='Customer discount code', related='partner_id.customer_discount_code')

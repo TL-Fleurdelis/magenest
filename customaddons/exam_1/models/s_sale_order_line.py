@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
 
-class NewSaleOderLine(models.Model):
+class SSaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     code_value_line = fields.Float(related='order_id.code_value')

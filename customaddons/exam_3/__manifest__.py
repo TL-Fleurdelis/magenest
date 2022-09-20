@@ -23,9 +23,9 @@
     'data': [
         'security/plan_group_security.xml',
         'security/ir.model.access.csv',
-        'views/plan_sale_order.xml',
-        'views/new_menu_views.xml',
-        'views/new_sale_order.xml',
+        'views/plan_sale_order_views.xml',
+        'views/plan_sale_order_menu_views.xml',
+        'views/s_sale_order_views.xml',
     ],
     'assets': {
         'web.assets_backend': [

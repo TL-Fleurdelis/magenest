@@ -2,7 +2,7 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 
-class ProductWarranty(models.Model):
+class SProductTemplate(models.Model):
     # Inherit from  product.template
     _inherit = 'product.template'
 

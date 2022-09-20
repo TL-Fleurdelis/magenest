@@ -1,1 +1,1 @@
-from .import customer_wizard
+from .import res_partner_add_discount_wizard

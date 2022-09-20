@@ -20,13 +20,13 @@ Bán hàng nâng cao
     'depends': ['base', 'sale_management', 'l10n_de', 'website_sale', 'event_booth_sale'],
     # always loaded
     'data': [
-        'security/new_customer_security.xml',
+        'security/exam_1_security.xml',
         'security/ir.model.access.csv',
-        'views/new_sale_order_views.xml',
-        'views/new_customer_views.xml',
-        'views/new_menu_views.xml',
-        'wizard/customer_wizard_views.xml',
-        'views/templates.xml',
+        'views/s_sale_order_views.xml',
+        'views/s_res_partner_views.xml',
+        'views/s_menu_views.xml',
+        'wizard/res_partner_add_discount_wizard_views.xml',
+        'views/s_cart_show_vip_code_template.xml',
     ],
     'assets': {
         'web.assets_backend': [

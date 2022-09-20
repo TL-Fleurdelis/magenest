@@ -3,7 +3,7 @@ from odoo.exceptions import UserError
 from odoo.tools.translate import _
 
 
-class SaleOrder(models.Model):
+class SSaleOrder(models.Model):
     _inherit = 'sale.order'
 
     plan_sale_order = fields.Many2one('plan.sale.order', string='Plan sale order')

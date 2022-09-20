@@ -22,16 +22,16 @@
     </record>
 
     <!--Show in form-->
-    <record id="view_new_product_form" model="ir.ui.view">
-        <field name="name">view.new.product.form</field>
+    <record id="s_product_template_form_view" model="ir.ui.view">
+        <field name="name">s.product.template.form.view</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
             <button name="action_open_label_layout" position="after">
                 <button type="object" name="activate_product_discount_code" class="btn-success"
-                        string="Active product discount code"/>
+                        string="Active product discount code" groups='exam_1.advanced_sale'/>
                 <button type="object" name="deactivate_product_discount_code" class="btn-danger"
-                        string="Deactivate product discount code"/>
+                        string="Deactivate product discount code" groups='exam_1.advanced_sale'/>
             </button>
             <field name="company_id" position="after">
                 <field name="date_from" groups='exam_1.advanced_sale'/>
@@ -63,8 +63,8 @@
     </record>
 
     <!--Show in tree-->
-    <record id="view_new_product_tree" model="ir.ui.view">
-        <field name="name">view.new.product.tree</field>
+    <record id="s_product_template_tree_view" model="ir.ui.view">
+        <field name="name">s.product.template.tree.view</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_tree_view"/>
         <field name="arch" type="xml">
@@ -84,8 +84,8 @@
     </record>
 
     <!--    Inherit Search View and create filter all product has warranty valid until today-->
-    <record id="view_sale_order_inherit_search" model="ir.ui.view">
-        <field name="name">view.sale.order.inherit.search</field>
+    <record id="s_product_template_inherit_search_view" model="ir.ui.view">
+        <field name="name">s.product.template.inherit.search.view</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_search_view"/>
         <field name="arch" type="xml">

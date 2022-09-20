@@ -1,1 +1,1 @@
-from . import product_warranty
+from . import s_product_template

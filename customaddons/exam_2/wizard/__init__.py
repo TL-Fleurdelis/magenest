@@ -1,1 +1,1 @@
-from .import warranty_wizard
+from .import product_template_add_warranty_wizard

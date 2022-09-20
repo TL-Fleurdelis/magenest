@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_wizard_advanced_sale,customer_wizard_advanced_sale,model_customer_wizard,exam_1.advanced_sale,1,1,1,1
+access_wizard_advanced_sale,res_partner_wizard_advanced_sale,model_res_partner_add_discount_wizard,exam_1.advanced_sale,1,1,1,1
