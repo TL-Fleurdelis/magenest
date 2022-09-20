@@ -68,3 +68,9 @@ class PlanSaleOrder(models.Model):
             self.message_post(subject='Refuse New Plan', body=mess_refuse)
         else:
             raise UserError('Cannot confirm this approve. Please check your data.')
+
+    def unlink(self):
+        for r in self:
+            if r.state == 'approve' or r.state == 'send':
+                raise UserError("You cannot delete this plan sale order in Approve state or Send state.")
+        return super(PlanSaleOrder, self).unlink()
