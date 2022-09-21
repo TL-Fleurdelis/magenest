@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 from odoo.exceptions import UserError
 
 
@@ -20,13 +20,13 @@ class PlanSaleOrder(models.Model):
     ], string='State of quotation', readonly=True, tracking=True, default='unknown')
 
     order_line = fields.One2many('plan.sale.order.list', 'order_id', string='Order Lines', tracking=True)
-    can_confirm = fields.Selection([('yes', 'Yes'), ('no', 'No')], default='no', tracking=True)
+    can_confirm = fields.Selection([('yes', 'Yes'), ('no', 'No'), ('new', 'New')], tracking=True)
 
     # Button set up new plan
     def btn_new(self):
         self.state = 'new'
         self.order_line.approval_status = 'unavailable'
-        self.can_confirm = 'no'
+        self.can_confirm = 'new'
 
     # Button send plan for supreme approver
     def btn_send(self):
@@ -78,3 +78,27 @@ class PlanSaleOrder(models.Model):
             if r.state in valid_list:
                 raise UserError("You cannot delete this plan sale order in Approve state or Send state.")
         return super(PlanSaleOrder, self).unlink()
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name'):
+            vals['name'] = vals['name'].title()
+        return super(PlanSaleOrder, self).create(vals)
+
+    def write(self, vals):
+        if vals.get('name', False):
+            vals['name'] = vals['name'].title()
+        return super(PlanSaleOrder, self).write(vals)
+
+    def copy(self, default={}):
+        default['name'] = 'Clone of' + ' ' + self.name
+        default['content'] = 'Clone of' + ' ' + self.content
+        return super(PlanSaleOrder, self).copy(default=default)
+
+    # @api.model
+    # def default_get(self, fields_list=[]):
+    #     print('call out default_get function')
+    #     res = super(PlanSaleOrder, self).default_get(fields_list)
+    #     res['name'] = "Name of quotation - Name of creator"
+    #     res['content'] = 'Plan sale order of + name of quotation + details of content'
+    #     return res

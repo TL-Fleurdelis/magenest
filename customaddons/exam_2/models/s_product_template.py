@@ -38,7 +38,7 @@ class SProductTemplate(models.Model):
     def deactivate_product_discount_code(self):
         if self.product_discount > 0 and self.active_product_discount is True:
             self.list_price += self.reduce_value
-            # self.reduce_value = 0
+            self.reduce_value = 0
             self.active_product_discount = False
         elif self.product_discount > 0 and self.active_product_discount is False:
             raise ValidationError("This product has deactivated the discount code.")
@@ -70,12 +70,11 @@ class SProductTemplate(models.Model):
     @api.depends('date_from', 'date_to')
     def _compute_date(self):
         for r in self:
+            r.days_left = 0
             if r.date_from and r.date_to:
                 count_date = int((r.date_to - fields.Date.today()).days)
                 # print(type(days_left))
                 r.days_left = count_date
-            else:
-                r.days_left = False
 
     # @api.onchange('product_warranty')
     # def _onchange_product_discount(self):
@@ -86,6 +85,7 @@ class SProductTemplate(models.Model):
     #             self.product_discount = 0
     #     else:
     #         self.product_discount = 10
+
     @api.depends('product_warranty')
     def _compute_product_warranty(self):
         for r in self:
@@ -115,10 +115,10 @@ class SProductTemplate(models.Model):
     #         else:
     #             r.status_warranty = 'Still Available'
 
-    @api.depends('date_to')
+    @api.depends('date_from', 'date_to')
     def _compute_warranty_left(self):
         for r in self:
-            if r.date_to:
+            if r.date_to and r.date_from:
 
                 today = fields.Date.today()
                 deadline_date = fields.Datetime.to_datetime(r.date_to).date()
@@ -133,7 +133,7 @@ class SProductTemplate(models.Model):
                 days = round((months - months_to_int) * (365.242 / 12), 0)
                 days_to_int = int(days)
 
-                r.status_warranty = '{0:d} years ,' '{1:d} months ,' '{2:d}  days ' \
+                r.status_warranty = '{0:d} years, ' '{1:d} months, ' '{2:d} days ' \
                     .format(years_to_int, months_to_int, days_to_int)
                 if years_to_int < 0 or months_to_int < 0 or days_to_int < 0:
                     r.status_warranty = 'Out of Warranty'

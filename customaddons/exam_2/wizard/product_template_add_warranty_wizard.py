@@ -8,7 +8,7 @@ class ProductTemplateAddWarrantyWizard(models.Model):
     product_id = fields.Many2many('product.template', string='Product')
     wiz_date_from = fields.Date()
     wiz_date_to = fields.Date()
-    wiz_product_warranty = fields.Text()
+    wiz_product_warranty = fields.Text(readonly=True)
 
     @api.onchange('wiz_date_from', 'wiz_date_to')
     def _onchange_code_warranty(self):
