@@ -133,9 +133,10 @@ class SProductTemplate(models.Model):
                 days = round((months - months_to_int) * (365.242 / 12), 0)
                 days_to_int = int(days)
 
-                r.status_warranty = '{0:d} years, ' '{1:d} months, ' '{2:d} days ' \
-                    .format(years_to_int, months_to_int, days_to_int)
-                if years_to_int < 0 or months_to_int < 0 or days_to_int < 0:
+                r.status_warranty = str(
+                    years_to_int) + ' years ' + str(months_to_int) + ' months ' + str(days_to_int) + ' days '
+
+                if r.days_left < 0:
                     r.status_warranty = 'Out of Warranty'
                 else:
                     pass

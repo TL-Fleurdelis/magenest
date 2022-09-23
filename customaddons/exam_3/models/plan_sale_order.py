@@ -102,3 +102,54 @@ class PlanSaleOrder(models.Model):
     #     res['name'] = "Name of quotation - Name of creator"
     #     res['content'] = 'Plan sale order of + name of quotation + details of content'
     #     return res
+
+    def method_browse(self):
+        # Phương thức browse luôn trả về 1 recordset,
+        # kể cả với trường hợp record với ID truyền vào không tồn tại trong Database.
+        # Lỗi chỉ xảy ra khi truy cập đến các trường của record kết quả được trả về đó.
+        # Cho nên cần lưu ý check record được trả về có tồn tại hay không.
+
+        temp = self.browse([1])
+        for plan in temp:
+            if temp.exists():
+                print('Plan exist: ', plan)
+            else:
+                print('Plan does not exists', plan)
+        temp2 = self.env['plan.sale.order'].browse(1)
+        print(temp2)
+
+    def btn_search(self):
+        # self.env được dùng khi gọi một trường từ một môi trường (model) khác
+
+        refuse_search = self.env['plan.sale.order'].search([('state', '=', 'refuse')])
+        refuse_search2 = self.search([('state', '=', 'refuse')])
+
+        print('refuse_search:', refuse_search)
+        print('refuse_search2:', refuse_search2)
+
+        refuse_search_count = self.search_count([('state', '=', 'refuse')])
+        print('Count refuse plans: ', refuse_search_count)
+
+        name_search_s = self.name_search('Clone of')
+        print(name_search_s)
+        for r in name_search_s:
+            print(r)
+        # print(name_search_s[0][1])
+
+        plan_obj = self.env['plan.sale.order']
+
+        get_fields = plan_obj.fields_get(['name'], ['type', 'string'])
+        get_all = plan_obj.fields_get()  # lấy tất cả thuộc tính của các trường có trong model đó
+        print(get_fields)
+        print(get_all)
+
+        temp_read = plan_obj.search([])
+        print('\nRead method: ', temp_read.read([]))
+        print(plan_obj.read_group([], fields=['create_uid.name'], groupby=['create_uid'], orderby='name'))
+
+        search_all = plan_obj.search([])
+        _search_all = plan_obj._search([])
+        print("All plan sale order:", search_all)
+        print('All plan sale order following _search method:', _search_all)
+        filter_send_plan = search_all.filtered(lambda temp: temp.state == 'send')
+        print('All plan sale order in send state:', filter_send_plan)

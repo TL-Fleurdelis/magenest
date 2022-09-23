@@ -19,7 +19,10 @@
                             attrs="{'invisible': [('state', 'in', ('approve','refuse'))]}" groups="exam_3.plan_sale_order_group_reviewer"/>
                     <button name="btn_confirm_refuse" type="object" string="Confirm Refuse" class="oe_highlight btn-danger"
                             attrs="{'invisible': [('state', 'in', ('approve','refuse'))]}" groups="exam_3.plan_sale_order_group_reviewer"/>
-
+                    <button name="method_browse" type="object" string="Method browse" class="oe_highlight btn-warning"
+                            groups="exam_3.plan_sale_order_group_reviewer"/>
+                    <button name="btn_search" type="object" string="Method search" class="oe_highlight btn-warning"
+                            groups="exam_3.plan_sale_order_group_reviewer"/>
                     <!--States of Plan Sale Order-->
                     <field name="state" widget="statusbar"/>
                 </header>
