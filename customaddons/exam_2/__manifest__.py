@@ -28,6 +28,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/s_product_template_views.xml',
+        'views/s_product_views_inherit.xml',
         'views/s_menu_views.xml',
         'wizard/product_template_add_warranty_wizard_views.xml',
         'views/s_product_template_views.xml',
