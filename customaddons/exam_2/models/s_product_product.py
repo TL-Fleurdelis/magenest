@@ -11,15 +11,14 @@ class SProductProduct(models.Model):
     @api.depends('product_template_variant_value_ids')
     def _compute_fashion_variants(self):
         for rec in self:
-            rec.size = ''
-            rec.gender = ''
-            rec.color = ''
+            rec.size = None
+            rec.gender = None
+            rec.color = None
             if rec.product_template_variant_value_ids:
                 for r in rec.product_template_variant_value_ids:
-                    if r.attribute_id.display_name and r.attribute_id.display_name == 'Size':
+                    if r.attribute_id.type == 'size':
                         rec.size = r.name
-                    if r.attribute_id.display_name and r.attribute_id.display_name == 'Gender':
+                    elif r.attribute_id.type == 'gender':
                         rec.gender = r.name
-                    if r.attribute_id.display_name and r.attribute_id.display_name == 'Color':
+                    elif r.attribute_id.type == 'color':
                         rec.color = r.name
-
