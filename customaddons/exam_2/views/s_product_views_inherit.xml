@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-        <record id="s_product_product_form_view" model="ir.ui.view">
+    <record id="s_product_product_form_view" model="ir.ui.view">
         <field name="name">s.product.product.form.view</field>
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_normal_form_view"/>
         <field name="arch" type="xml">
             <field name="company_id" position="after">
-                <field name="sex"/>
+                <field name="gender"/>
                 <field name="size"/>
                 <field name="color"/>
             </field>

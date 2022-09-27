@@ -9,7 +9,6 @@ class SProductTemplate(models.Model):
     _inherit = 'product.template'
 
     date_from = fields.Datetime(string='Date from')
-    #fields.Datetime.now() fields.Date.today() time.strftime('%Y-01-01')
     date_to = fields.Date(string='Date to')
 
     product_warranty = fields.Text(string='Product Warranty', readonly=True, compute="_compute_code_warranty")
