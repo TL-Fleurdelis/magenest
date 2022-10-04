@@ -49,6 +49,9 @@
             <xpath expr="//field[@name='company_id']" position="after">
                 <field name="customer_discount_code" decoration-info="customer_discount_code != ''" widget="badge"/>
             </xpath>
+            <xpath expr="//field[@name='name']" position="replace">
+                <field name="name" string="Mã biên lai"/>
+            </xpath>
         </field>
     </record>
 

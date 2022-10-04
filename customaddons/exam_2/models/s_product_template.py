@@ -20,6 +20,19 @@ class SProductTemplate(models.Model):
     # Sync Magento
     sync_magento = fields.Boolean()
 
+    state = fields.Selection([
+        ('unknown', 'Unknown'),
+        ('new', 'New'),
+        ('send', 'Send'),
+        ('approve', 'Approve'),
+        ('refuse', 'Refuse'),
+    ], string='State of quotation', readonly=True, tracking=True, default='unknown')
+
+    # Mã cũ
+    ma_cu = fields.Char(string="Mã cũ")
+    # Mã vật tư
+    ma_vat_tu = fields.Char(string="Mã vât tư")
+
     # Select and Unselect Magento field
     def select_sync_magento(self):
         self.sync_magento = True

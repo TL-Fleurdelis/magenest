@@ -33,6 +33,7 @@
                 <button type="object" name="deactivate_product_discount_code" class="btn-danger"
                         string="Deactivate product discount code" groups='exam_1.advanced_sale'/>
             </button>
+
             <field name="company_id" position="after">
                 <field name="date_from" groups='exam_1.advanced_sale'/>
                 <field name="date_to" groups='exam_1.advanced_sale'/>
@@ -46,11 +47,15 @@
                 <field name="active_product_discount"/>
                 <field name="reduce_value" class="reduce_value"
                        attrs="{'invisible': [('active_product_discount', '=',False)]}"/>
+                <field name="ma_cu" modifiers="{}"/>
+                <field name="ma_vat_tu" invisible="0" modifiers="{&quot;invisible&quot;: true}"/>
             </field>
+
             <field name="purchase_ok" position="before">
                 <field name="sync_magento"/>
                 <label for="sync_magento"/>
             </field>
+
             <!--            <xpath expr="//field[@name='company_id']" position="after">-->
             <!--                <field name="date_from" groups='exam_1.advanced_sales'/>-->
             <!--                <field name="date_to" groups='exam_1.advanced_sales'/>-->

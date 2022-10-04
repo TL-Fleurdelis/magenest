@@ -22,7 +22,7 @@
     'version': '0.1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['sale_management', 'exam_1', 'product', 'website_sale'],
+    'depends': ['sale_management', 'exam_1', 'product', 'website_sale', 'point_of_sale'],
 
     # always loaded
     'data': [
@@ -33,6 +33,7 @@
         'views/s_menu_views.xml',
         'wizard/product_template_add_warranty_wizard_views.xml',
         'views/s_product_template_views.xml',
+        'views/s_point_of_sale_order_views.xml',
     ],
     'assets': {
         'web.assets_backend': [
