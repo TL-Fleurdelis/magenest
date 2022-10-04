@@ -48,8 +48,12 @@
                 <field name="reduce_value" class="reduce_value"
                        attrs="{'invisible': [('active_product_discount', '=',False)]}"/>
                 <field name="ma_cu" modifiers="{}"/>
-                <field name="ma_vat_tu" invisible="0" modifiers="{&quot;invisible&quot;: true}"/>
+                <field name="ma_vat_tu" modifiers="{&quot;invisible&quot;: true}"/>
             </field>
+
+            <xpath expr="//field[@name='ma_vat_tu']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
 
             <field name="purchase_ok" position="before">
                 <field name="sync_magento"/>
